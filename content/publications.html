@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Publications — LIME</title>
+  <meta name="description" content="Publications from LIME — UFRN." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="brand" href="index.html" style="text-decoration:none">
+        <img src="assets/img/lime.svg" alt="LIME logo" />
+        <div class="title">
+          <strong>LIME — UFRN</strong>
+          <span>Laboratory of Instrumentation & Microelectronics</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="projects.html">Projects</a>
+        <a href="publications.html" style="color:var(--text); background:#f3f4f6;">Publications</a>
+        <a href="theses.html">Theses/TCC</a>
+        <a href="people.html">People</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="news.html">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Publications</h1>
+      <p class="muted">
+        Add one Markdown file per publication in <code>content/publications/</code> and list it in
+        <code>content/publications/_index.json</code>.
+      </p>
+    </section>
+
+    <section>
+      <div id="pub_list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="y"></span> LIME-UFRN</div>
+      <div class="muted">Hosted on GitHub Pages</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+    loadIndexList("#pub_list", "content/publications/_index.json", "content/publications");
+  </script>
+</body>
+</html>
