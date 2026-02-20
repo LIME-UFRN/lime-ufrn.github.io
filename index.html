@@ -5,184 +5,76 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LIME — UFRN</title>
   <meta name="description" content="LIME — Laboratory of Instrumentation and Microelectronics at UFRN (Natal, Brazil)." />
-  <style>
-    :root{
-      --bg:#0b1020;
-      --card:#111833;
-      --text:#e9eefc;
-      --muted:#b9c3e6;
-      --line:rgba(255,255,255,.12);
-      --accent:#7aa2ff;
-      --accent2:#6ee7b7;
-      --max:1000px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:radial-gradient(1200px 600px at 20% 0%, rgba(122,162,255,.25), transparent 60%),
-                 radial-gradient(900px 500px at 90% 10%, rgba(110,231,183,.18), transparent 55%),
-                 var(--bg);
-      color:var(--text);
-    }
-    a{color:var(--text); text-decoration:none}
-    a:hover{color:white; text-decoration:underline}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      position:sticky; top:0; backdrop-filter: blur(10px);
-      background:rgba(11,16,32,.7); border-bottom:1px solid var(--line);
-      padding:14px 18px; z-index:5;
-    }
-    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
-    .logo{
-      width:34px; height:34px; border-radius:10px;
-      background:linear-gradient(135deg, var(--accent), var(--accent2));
-      display:inline-block;
-    }
-    nav{display:flex; gap:14px; flex-wrap:wrap; font-size:14px}
-    nav a{opacity:.9}
-    .hero{padding:34px 0 18px}
-    h1{margin:0 0 10px; font-size:36px; line-height:1.1}
-    .sub{color:var(--muted); max-width:75ch; font-size:16px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0}
-    .pill{
-      font-size:12px; color:var(--muted);
-      border:1px solid var(--line); border-radius:999px;
-      padding:6px 10px; background:rgba(255,255,255,.03);
-    }
-    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:18px}
-    .card{
-      grid-column:span 6;
-      border:1px solid var(--line); border-radius:16px;
-      padding:16px 16px 14px; background:rgba(17,24,51,.65);
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-    }
-    .card h2{margin:0 0 8px; font-size:18px}
-    .card p, .card li{color:var(--muted)}
-    .card ul{margin:10px 0 0; padding-left:18px}
-    .card .small{font-size:13px}
-    .full{grid-column:span 12}
-    .two{grid-column:span 6}
-    .three{grid-column:span 4}
-    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid var(--line); border-radius:12px;
-      padding:9px 12px; background:rgba(255,255,255,.04);
-      font-size:14px;
-    }
-    .btn.primary{
-      border-color:rgba(122,162,255,.55);
-      background:linear-gradient(135deg, rgba(122,162,255,.22), rgba(110,231,183,.12));
-    }
-    footer{margin-top:34px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
-    @media (max-width: 840px){
-      .card,.two,.three{grid-column:span 12}
-      h1{font-size:30px}
-      header{position:relative}
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-
 <body>
   <header>
-    <div class="brand">
-      <span class="logo" aria-hidden="true"></span>
-      <span>LIME — UFRN</span>
+    <div class="header-inner">
+      <a class="brand" href="index.html" style="text-decoration:none">
+        <img src="assets/img/lime.svg" alt="LIME logo" />
+        <div class="title">
+          <strong>LIME — UFRN</strong>
+          <span>Laboratory of Instrumentation & Microelectronics</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="projects.html">Projects</a>
+        <a href="publications.html">Publications</a>
+        <a href="theses.html">Theses/TCC</a>
+        <a href="people.html">People</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="news.html">News</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
-      <a href="#team">Team</a>
-      <a href="#publications">Publications</a>
-      <a href="#contact">Contact</a>
-    </nav>
   </header>
 
-  <main class="wrap">
+  <main>
     <section class="hero">
-      <h1>Laboratory of Instrumentation & Microelectronics</h1>
-      <p class="sub">
-        LIME develops sensors, analog/mixed-signal circuits, and measurement systems—bridging microelectronics
-        and instrumentation for real-world applications.
-      </p>
-      <div class="pillrow">
-        <span class="pill">UFRN • Natal, Brazil</span>
-        <span class="pill">Sensors & Transducers</span>
-        <span class="pill">Analog & Mixed-Signal ICs</span>
-        <span class="pill">Measurement Systems</span>
-        <span class="pill">IoT/WSN Instrumentation</span>
-      </div>
+      <h1>About LIME</h1>
+      <p class="muted">UFRN • Natal, RN • Brazil</p>
 
-      <div class="btns">
-        <a class="btn primary" href="#contact">Get in touch</a>
-        <a class="btn" href="https://github.com/LIME-UFRN" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-    </section>
-
-    <section class="grid" id="research">
-      <div class="card two">
-        <h2>Research Focus</h2>
-        <ul>
-          <li>Sensors, transducers, and interfaces</li>
-          <li>Analog and mixed-signal circuit design</li>
-          <li>Measurement architectures and uncertainty</li>
-          <li>Embedded instrumentation for IoT/WSN</li>
-        </ul>
-      </div>
-
-      <div class="card two" id="projects">
-        <h2>Selected Projects</h2>
-        <p class="small">Add 3–5 highlighted projects here (title + one-line description).</p>
-        <ul>
-          <li><strong>Project A:</strong> short description.</li>
-          <li><strong>Project B:</strong> short description.</li>
-          <li><strong>Project C:</strong> short description.</li>
-        </ul>
-      </div>
-
-      <div class="card full" id="team">
-        <h2>Team</h2>
-        <p class="small">
-          Add names + roles. Later we can create a dedicated <code>team.html</code> page with photos.
-        </p>
-        <ul>
-          <li><strong>Prof. Yuri Catunda</strong> — Lab Lead</li>
-          <li>Students / collaborators — (add here)</li>
-        </ul>
-      </div>
-
-      <div class="card two" id="publications">
-        <h2>Publications</h2>
-        <p class="small">
-          Add 5–10 key papers with DOI links. We can later generate this automatically from BibTeX, if you want.
-        </p>
-        <ul>
-          <li>Paper title — venue, year — <a href="#" aria-label="DOI link">DOI</a></li>
-          <li>Paper title — venue, year — <a href="#" aria-label="DOI link">DOI</a></li>
-        </ul>
-      </div>
-
-      <div class="card two" id="contact">
-        <h2>Contact</h2>
-        <p class="small">
-          Federal University of Rio Grande do Norte (UFRN)<br/>
-          Natal, RN — Brazil
-        </p>
-        <p class="small">
-          Email: <a href="mailto:YOUR_EMAIL@ufrn.br">YOUR_EMAIL@ufrn.br</a>
-        </p>
+      <div class="kv">
+        <div class="card">
+          <h2 style="margin-top:0">Mission</h2>
+          <div id="about_md"></div>
+        </div>
+        <div class="card">
+          <h2 style="margin-top:0">Research areas</h2>
+          <ul>
+            <li>Sensors and transducers</li>
+            <li>Analog and mixed-signal circuits</li>
+            <li>Measurement systems and instrumentation</li>
+            <li>Embedded instrumentation for IoT/WSN</li>
+          </ul>
+          <p class="muted" style="margin-top:10px">
+            Contact: <a href="mailto:YOUR_EMAIL@ufrn.br">YOUR_EMAIL@ufrn.br</a>
+          </p>
+        </div>
       </div>
     </section>
 
-    <footer>
-      © <span id="y"></span> LIME-UFRN • Hosted on GitHub Pages
-    </footer>
+    <section>
+      <h2>Highlights</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          We can add 3–6 highlighted items here (projects, chips, awards, collaborations), manually or from Markdown later.
+        </p>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="y"></span> LIME-UFRN</div>
+      <div class="muted">Hosted on GitHub Pages</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+    loadMarkdownInto("#about_md", "content/about.md");
   </script>
 </body>
 </html>
