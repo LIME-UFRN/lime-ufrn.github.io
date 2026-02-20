@@ -1,32 +1,119 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17228741.svg)](https://doi.org/10.5281/zenodo.17228741)
+# LIME --- Laboratory of Instrumentation & Microelectronics
 
-<h1 align="center">Lab Website Template</h1>
-<p align="center">
-<img height="200" src="https://raw.githubusercontent.com/greenelab/lab-website-template/main/images/share.jpg?raw=true" alt="Lab Website Template">
-</p>
+Federal University of Rio Grande do Norte (UFRN)\
+Natal, RN --- Brazil
 
-Lab Website Template (LWT) is an easy-to-use, flexible website template for labs.
-Spend less time worrying about managing a website and citations, and more time running your lab.
+This repository hosts the official website of the LIME research
+laboratory.
 
-👇👇 **Get Started** 👇👇
+The website is built using static HTML, CSS, and JavaScript, and is
+deployed via GitHub Pages.
 
-[**Documentation**](https://greene-lab.gitbook.io/lab-website-template-docs)
+------------------------------------------------------------------------
 
-## Key Features
+## 🌐 Website
 
-- 🤖 Based on Git, GitHub, and Jekyll.
-- 📜 Automatically generated citations from simple identifiers (DOI, PubMed, ORCID, and many more) using Manubot. E.g. `doi:1234/5678` -> `title`, `authors`, `publisher`, `date`, etc.
-- 🧱 A comprehensive and flexible suite of pre-made components (building blocks) for structuring and styling your website:
-  - Formatted tables, code blocks, figures, and other basic elements.
-  - Citations with thumbnails and other rich details.
-  - List large sets of data with flexible filters and components.
-  - ...many more
-- 👁️ Automatic pull request previews.
-- ⚙️ Easy and automated configuration.
-- 👥 Team member pages with bios, roles, and social media links.
-- 🖋️ Blog posts with tags and rich content.
-- 📱 Works and looks good on desktop and mobile.
-- 🤝 Great documentation and support (if we do say so ourselves).
-- ... and much more!
+Live at:\
+https://lime-ufrn.github.io
 
-![GitHub last commit](https://img.shields.io/github/last-commit/greenelab/lab-website-template)
+------------------------------------------------------------------------
+
+## 📁 Repository Structure
+
+index.html → Landing page (About)\
+projects.html → Projects page\
+publications.html → Publications page\
+theses.html → Theses / TCC page\
+people.html → Current members + alumni\
+infrastructure.html → Equipment and facilities\
+news.html → News and events (optional)
+
+assets/\
+css/style.css → Main stylesheet\
+js/app.js → Markdown renderer and loader\
+img/lime.svg → Official logo
+
+content/\
+about.md\
+infrastructure.md
+
+people/\
+current.md\
+alumni.md
+
+publications/\
+\_index.json\
+2026-paper-title.md\
+2025-paper-title.md
+
+theses/\
+\_index.json\
+2026-tcc-student.md
+
+news/\
+\_index.json\
+2026-02-20-site-launch.md
+
+------------------------------------------------------------------------
+
+## ✍️ How to Update Content
+
+### Add a Publication
+
+1.  Create a new Markdown file inside:\
+    content/publications/
+
+2.  Add the filename to:\
+    content/publications/\_index.json
+
+3.  Commit.
+
+The website will automatically display it.
+
+------------------------------------------------------------------------
+
+### Add a Thesis / TCC
+
+1.  Create a new Markdown file inside:\
+    content/theses/
+
+2.  Add the filename to:\
+    content/theses/\_index.json
+
+3.  Commit.
+
+------------------------------------------------------------------------
+
+### Update People
+
+Edit:
+
+content/people/current.md\
+content/people/alumni.md
+
+------------------------------------------------------------------------
+
+### Update Infrastructure
+
+Edit:
+
+content/infrastructure.md
+
+------------------------------------------------------------------------
+
+## 🚀 Deployment
+
+The website is automatically deployed by GitHub Pages from the main
+branch.
+
+Changes usually appear within 1--2 minutes after committing.
+
+------------------------------------------------------------------------
+
+## 🧱 Design Philosophy
+
+-   Clean white layout\
+-   Minimal dependencies\
+-   No build system\
+-   Easy Markdown-based updates\
+-   Long-term maintainability
