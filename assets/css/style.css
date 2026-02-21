@@ -97,12 +97,12 @@ small, .muted{ color: var(--muted); }
   gap: 18px;
   margin-top: 14px;
 }
-.card{
+/* .card{
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 14px 12px;
   background: #fff;
-}
+} */
 
 ul{ margin: 8px 0 0; padding-left: 18px; }
 li{ margin: 6px 0; }
