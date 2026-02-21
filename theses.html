@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Projects — LIME</title>
-  <meta name="description" content="Current and past projects from LIME — UFRN." />
+  <title>Theses - LIME</title>
+  <meta name="description" content="Theses and undergraduate projects supervised at LIME-UFRN." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -13,15 +13,15 @@
       <a class="brand" href="index.html" style="text-decoration:none">
         <img src="assets/img/lime.svg" alt="LIME logo" />
         <div class="title">
-          <strong>LIME — UFRN</strong>
+          <strong>LIME - UFRN</strong>
           <span>Laboratory of Instrumentation & Microelectronics</span>
         </div>
       </a>
 
       <nav>
-        <a href="projects.html" style="color:var(--text); background:#f3f4f6;">Projects</a>
+        <a href="projects.html">Projects</a>
         <a href="publications.html">Publications</a>
-        <a href="theses.html">Theses</a>
+        <a href="theses.html" style="color:var(--text); background:#f3f4f6;">Theses</a>
         <a href="people.html">People</a>
         <a href="infrastructure.html">Infrastructure</a>
         <a href="news.html">News</a>
@@ -31,17 +31,17 @@
 
   <main>
     <section class="hero">
-      <h1>Projects</h1>
+      <h1>Theses & Undergraduate Projects</h1>
     </section>
 
     <section>
-      <div id="project_list"></div>
+      <div id="theses_list"></div>
     </section>
   </main>
 
   <footer>
     <div class="footer-inner">
-      <div>© <span id="y"></span> LIME-UFRN</div>
+      <div>&copy; <span id="y"></span> LIME-UFRN</div>
       <div class="muted">Hosted on GitHub Pages</div>
     </div>
   </footer>
@@ -50,11 +50,11 @@
   <script src="assets/js/app.js?v=20260221-3"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if (typeof loadProjectList === "function") {
-      loadProjectList("#project_list", "content/projects/_index.json", "content/projects");
+    if (typeof loadThesesList === "function") {
+      loadThesesList("#theses_list", "content/theses/_index.json", "content/theses");
     } else {
-      document.querySelector("#project_list").innerHTML =
-        '<p class="muted">Could not initialize project loader. Please hard refresh the page (Ctrl+F5).</p>';
+      document.querySelector("#theses_list").innerHTML =
+        '<p class="muted">Could not initialize theses loader. Please hard refresh the page (Ctrl+F5).</p>';
     }
   </script>
 </body>

@@ -233,5 +233,42 @@ footer{
   margin: 6px 0 0;
 }
 
+#theses_list > h2 {
+  margin-top: 32px;
+  padding-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.thesis-card {
+  margin: 14px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.thesis-card h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.thesis-card p {
+  margin: 4px 0;
+}
+
+.thesis-advisor {
+  margin-top: 6px;
+}
+
+.thesis-links {
+  margin: 6px 0 0;
+}
+
+.thesis-summary p {
+  margin: 6px 0 0;
+}
+
 
 

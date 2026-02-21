@@ -159,6 +159,200 @@ function parseLinks(rawLinks) {
     .filter(Boolean);
 }
 
+function parseYamlFrontMatter(raw) {
+  const lines = raw.split(/\r?\n/);
+  if (!lines.length || lines[0].trim() !== "---") {
+    return { metadata: {}, body: raw.trim() };
+  }
+
+  const metadata = {};
+  let end = -1;
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line === "---") {
+      end = i;
+      break;
+    }
+    if (!line) continue;
+
+    const sep = line.indexOf(":");
+    if (sep === -1) continue;
+    const key = line.slice(0, sep).trim().toLowerCase();
+    let value = line.slice(sep + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    metadata[key] = value;
+  }
+
+  if (end === -1) {
+    return { metadata: {}, body: raw.trim() };
+  }
+
+  const body = lines.slice(end + 1).join("\n").trim();
+  return { metadata, body };
+}
+
+function toNumberOrNaN(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : NaN;
+}
+
+function buildThesisMetaLine(item) {
+  const institution = item.institution || "UFRN";
+
+  if (item.status === "ongoing") {
+    const startedYear = Number.isNaN(item.startYear) ? item.year : item.startYear;
+    const levelMap = {
+      phd: "PhD Supervision",
+      msc: "MSc Supervision",
+      ug: "Undergraduate Supervision"
+    };
+    const label = levelMap[item.level] || "Supervision";
+    const startedText = Number.isNaN(startedYear) ? "Started" : `Started ${startedYear}`;
+    return `${label} - ${institution} - ${startedText}`;
+  }
+
+  if (item.level === "phd") return `PhD Thesis - ${institution} - ${item.year}`;
+  if (item.level === "msc") return `MSc Dissertation - ${institution} - ${item.year}`;
+  if (item.level === "ug") {
+    if (item.ugSubtype === "ic") return `Undergraduate Research (IC) - ${institution} - ${item.year}`;
+    return `Undergraduate Project (TCC) - ${institution} - ${item.year}`;
+  }
+
+  return `${institution} - ${item.year}`;
+}
+
+async function loadThesesList(listSelector, indexJsonPath, basePath) {
+  const el = document.querySelector(listSelector);
+  if (!el) return;
+
+  try {
+    const res = await fetch(indexJsonPath, { cache: "no-store" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const files = await res.json();
+
+    const entries = [];
+    const validStatus = new Set(["ongoing", "completed"]);
+    const validLevels = new Set(["phd", "msc", "ug"]);
+
+    for (const f of files) {
+      const r = await fetch(`${basePath}/${f}`, { cache: "no-store" });
+      if (!r.ok) continue;
+      const raw = await r.text();
+      const { metadata, body } = parseYamlFrontMatter(raw);
+
+      const status = (metadata.status || "").toLowerCase();
+      const level = (metadata.level || "").toLowerCase();
+      if (!validStatus.has(status) || !validLevels.has(level)) continue;
+
+      const type = (metadata.type || "").toLowerCase();
+      const ugSubtype = (metadata.ug_subtype || "").toLowerCase();
+      const year = toNumberOrNaN(metadata.year);
+      const startYear = toNumberOrNaN(metadata.start_year);
+      const title = metadata.title || "";
+      const student = metadata.student || "";
+      const advisor = metadata.advisor || "";
+      if (!title || !student || !advisor) continue;
+      if (status === "completed" && Number.isNaN(year)) continue;
+
+      entries.push({
+        status,
+        level,
+        type,
+        ugSubtype,
+        year,
+        startYear,
+        title,
+        student,
+        institution: metadata.institution || "UFRN",
+        advisor,
+        coadvisor: metadata.coadvisor || "",
+        pdf: metadata.pdf || "",
+        repo: metadata.repo || "",
+        notes: metadata.notes || "",
+        body
+      });
+    }
+
+    const sections = [
+      {
+        title: "Ongoing Supervisions",
+        items: entries
+          .filter((e) => e.status === "ongoing")
+          .sort((a, b) => {
+            const ay = Number.isNaN(a.startYear) ? a.year : a.startYear;
+            const by = Number.isNaN(b.startYear) ? b.year : b.startYear;
+            return (Number.isNaN(by) ? 0 : by) - (Number.isNaN(ay) ? 0 : ay);
+          })
+      },
+      {
+        title: "PhD Theses",
+        items: entries
+          .filter((e) => e.status === "completed" && e.level === "phd")
+          .sort((a, b) => b.year - a.year)
+      },
+      {
+        title: "MSc Dissertations",
+        items: entries
+          .filter((e) => e.status === "completed" && e.level === "msc")
+          .sort((a, b) => b.year - a.year)
+      },
+      {
+        title: "Undergraduate Projects",
+        items: entries
+          .filter((e) => e.status === "completed" && e.level === "ug")
+          .sort((a, b) => b.year - a.year)
+      }
+    ];
+
+    let out = "";
+    for (const section of sections) {
+      out += `<h2>${section.title}</h2>`;
+      if (!section.items.length) {
+        out += `<p class="muted">No entries yet.</p>`;
+        continue;
+      }
+
+      out += section.items
+        .map((item) => {
+          const title = escapeHtml(item.title);
+          const student = escapeHtml(item.student);
+          const metaLine = escapeHtml(buildThesisMetaLine(item));
+          let advisorLine = `Advisor: ${escapeHtml(item.advisor)}`;
+          if (item.coadvisor) advisorLine += ` | Co-advisor: ${escapeHtml(item.coadvisor)}`;
+
+          const links = [];
+          if (item.pdf) links.push(`<a href="${escapeHtml(item.pdf)}">PDF</a>`);
+          if (item.repo) links.push(`<a href="${escapeHtml(item.repo)}">Repository</a>`);
+          const linksHtml = links.length ? `<p class="thesis-links">${links.join(" | ")}</p>` : "";
+
+          const summarySource = item.notes || item.body;
+          const summaryHtml = summarySource
+            ? `<div class="thesis-summary">${renderMarkdown(summarySource)}</div>`
+            : "";
+
+          return `<article class="thesis-card">
+            <h3>${title}</h3>
+            <p>${student}</p>
+            <p class="muted">${metaLine}</p>
+            <p class="muted thesis-advisor">${advisorLine}</p>
+            ${linksHtml}
+            ${summaryHtml}
+          </article>`;
+        })
+        .join("");
+    }
+
+    el.innerHTML = out || `<p class="muted">No entries yet.</p>`;
+  } catch (err) {
+    el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
+  }
+}
+
 async function loadPeopleList(listSelector, indexJsonPath, basePath) {
   const el = document.querySelector(listSelector);
   if (!el) return;
