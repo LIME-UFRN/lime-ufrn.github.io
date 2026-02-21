@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Theses | LIME-UFRN</title>
-  <meta name="description" content="PhD theses, MSc dissertations, undergraduate projects, and ongoing supervisions at LIME-UFRN." />
-  <link rel="canonical" href="https://lime-ufrn.github.io/theses.html" />
+  <title>Resources | LIME-UFRN</title>
+  <meta name="description" content="Technical resources and reference materials from LIME-UFRN." />
+  <link rel="canonical" href="https://lime-ufrn.github.io/resources.html" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -22,12 +22,12 @@
       <nav>
         <a href="projects.html">Projects</a>
         <a href="publications.html">Publications</a>
-        <a href="theses.html" style="color:var(--text); background:#f3f4f6;">Theses</a>
+        <a href="theses.html">Theses</a>
         <a href="people.html">People</a>
         <a href="facilities.html">Facilities</a>
         <a href="collaborations.html">Collaborations</a>
         <a href="gallery.html">Gallery</a>
-        <a href="resources.html">Resources</a>
+        <a href="resources.html" style="color:var(--text); background:#f3f4f6;">Resources</a>
         <a href="news.html">News</a>
       </nav>
     </div>
@@ -35,11 +35,13 @@
 
   <main>
     <section class="hero">
-      <h1>Theses & Undergraduate Projects</h1>
+      <h1>Resources</h1>
     </section>
 
     <section>
-      <div id="theses_list"></div>
+      <div class="card">
+        <p class="muted" style="margin:0">Pagen under construction</p>
+      </div>
     </section>
   </main>
 
@@ -50,16 +52,8 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="assets/js/app.js?v=20260221-4"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if (typeof loadThesesList === "function") {
-      loadThesesList("#theses_list", "content/theses/_index.json", "content/theses");
-    } else {
-      document.querySelector("#theses_list").innerHTML =
-        '<p class="muted">Could not initialize theses loader. Please hard refresh the page (Ctrl+F5).</p>';
-    }
   </script>
 </body>
 </html>
