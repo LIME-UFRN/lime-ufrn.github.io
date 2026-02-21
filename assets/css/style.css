@@ -150,7 +150,12 @@ footer{
 .pub-card p { margin: 0px 0; }
 
 
-
+.card{
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: #ffffff;
+}
 
 
 
