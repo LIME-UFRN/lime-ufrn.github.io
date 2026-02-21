@@ -128,6 +128,13 @@ footer{
   h1{ font-size: 28px; }
 }
 
+/* Publications list spacing: robust (no margin-collapsing issues) */
+#pub_list{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;              /* <-- spacing between publication entries */
+}
+
 /* Year headers */
 #pub_list > h2 {
   margin-top: 32px;
