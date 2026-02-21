@@ -47,10 +47,15 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20260221"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    loadProjectList("#project_list", "content/projects/_index.json", "content/projects");
+    if (typeof loadProjectList === "function") {
+      loadProjectList("#project_list", "content/projects/_index.json", "content/projects");
+    } else {
+      document.querySelector("#project_list").innerHTML =
+        '<p class="muted">Could not initialize project loader. Please hard refresh the page (Ctrl+F5).</p>';
+    }
   </script>
 </body>
 </html>
