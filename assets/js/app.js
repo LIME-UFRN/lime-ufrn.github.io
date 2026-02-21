@@ -220,7 +220,14 @@ async function loadPeopleList(listSelector, indexJsonPath, basePath) {
       }
     }
 
-    for (const [, people] of activeByPosition) {
+    for (const [position, people] of activeByPosition) {
+      if (position === "faculty") {
+        people.sort((a, b) => {
+          if (a.lead !== b.lead) return a.lead ? -1 : 1;
+          return a.name.localeCompare(b.name);
+        });
+        continue;
+      }
       people.sort((a, b) => a.name.localeCompare(b.name));
     }
     alumni.sort((a, b) => {
