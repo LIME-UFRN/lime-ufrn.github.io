@@ -16,8 +16,9 @@ async function loadMarkdownInto(selector, path) {
   try {
     const res = await fetch(path, { cache: "no-store" });
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-    const md = await res.text();
-    el.innerHTML = renderMarkdown(md);
+    const mdRaw = await res.text();
+    const { body } = parseYamlFrontMatter(mdRaw);
+    el.innerHTML = renderMarkdown(body);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load <code>${path}</code> (${err.message}).</p>`;
   }

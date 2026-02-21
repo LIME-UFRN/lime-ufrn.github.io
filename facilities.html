@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>People - LIME</title>
-  <meta name="description" content="LIME-UFRN members and alumni." />
+  <title>Facilities - LIME</title>
+  <meta name="description" content="Laboratory facilities and equipment at LIME-UFRN." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -22,8 +22,8 @@
         <a href="projects.html">Projects</a>
         <a href="publications.html">Publications</a>
         <a href="theses.html">Theses</a>
-        <a href="people.html" style="color:var(--text); background:#f3f4f6;">People</a>
-        <a href="facilities.html">Facilities</a>
+        <a href="people.html">People</a>
+        <a href="facilities.html" style="color:var(--text); background:#f3f4f6;">Facilities</a>
         <a href="news.html">News</a>
       </nav>
     </div>
@@ -31,11 +31,11 @@
 
   <main>
     <section class="hero">
-      <h1>People</h1>
+      <h1>Facilities</h1>
     </section>
 
-    <section>
-      <div id="people_list"></div>
+    <section class="facilities-content card">
+      <div id="facilities_md"></div>
     </section>
   </main>
 
@@ -50,12 +50,7 @@
   <script src="assets/js/app.js?v=20260221-4"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if (typeof loadPeopleList === "function") {
-      loadPeopleList("#people_list", "content/people/_index.json", "content/people");
-    } else {
-      document.querySelector("#people_list").innerHTML =
-        '<p class="muted">Could not initialize people loader. Please hard refresh the page (Ctrl+F5).</p>';
-    }
+    loadMarkdownInto("#facilities_md", "content/facilities/equipment.md");
   </script>
 </body>
 </html>
