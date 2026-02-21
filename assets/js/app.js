@@ -47,7 +47,7 @@ async function loadIndexList(listSelector, indexJsonPath, basePath) {
       // Remove the year line from display
       const md = mdRaw.replace(/^\s*year:\s*\d{4}\s*$/m, "").trim();
 
-      const html = `<article class="card pub-card">${renderMarkdown(md)}</article>`;
+      const html = `<article class="pub-card">${renderMarkdown(md)}</article>`;
 
       if (!groups.has(year)) groups.set(year, []);
       groups.get(year).push(html);
