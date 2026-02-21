@@ -126,6 +126,7 @@ footer{
   .kv{ grid-template-columns: 1fr; }
   .brand{ min-width: unset; }
   h1{ font-size: 28px; }
+}
 
 /* Year headers */
 #pub_list > h2 {
