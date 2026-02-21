@@ -129,11 +129,7 @@ footer{
 }
 
 /* Publications list spacing: robust (no margin-collapsing issues) */
-#pub_list{
-  display: flex;
-  flex-direction: column;
-  gap: 6px;              /* <-- spacing between publication entries */
-}
+
 
 /* Year headers */
 #pub_list > h2 {
