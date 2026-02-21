@@ -129,11 +129,11 @@ footer{
 }
 
 /* Publications list spacing: robust (no margin-collapsing issues) */
-#pub_list{
+/* #pub_list{
   display: flex;
   flex-direction: column;
   gap: 12px;              /* <-- spacing between publication entries */
-}
+} */
 
 /* Year headers */
 #pub_list > h2 {
@@ -141,7 +141,7 @@ footer{
   padding-bottom: 6px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  border-bottom: 1px solid #e83939;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 /* Publication cards */
