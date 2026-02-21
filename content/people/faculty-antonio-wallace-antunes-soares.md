@@ -1,13 +1,7 @@
 position: faculty
 status: active
 name: Antonio Wallace Antunes Soares
-affiliation: Departamento de Engenharia Elétrica
+affiliation: Department of Electrical Engineering
 
-PhD.
-
-Áreas de Interesse (Ensino e Pesquisa):
-
-- Circuitos Integrados Analógicos e Mistos
-- Instrumentação Eletrônica
-- Sistemas Embarcados
-- MCUs, DSPs e FPGAs
+Faculty Member, Department of Electrical Engineering.  
+Research and teaching interests: Analog and mixed-signal integrated circuits, electronic instrumentation, embedded systems, and MCUs, DSPs, and FPGAs.
