@@ -137,9 +137,10 @@ footer{
 }
 
 /* Publication cards */
-.pub-card {margin: 14px 0; }
-.pub-card h3 { margin: 0 0 6px;  font-size: 18px; }
+.pub-card {margin: 6px 0; }
+.pub-card h3 { margin: 0 0 4px;  font-size: 18px; }
 .pub-card p { margin: 4px 0; }
+
 
 
 
