@@ -87,7 +87,7 @@ small, .muted{ color: var(--muted); }
 
 .hero{
   padding: 10px 0 18px;
-  border-bottom: 1px solid var(--line);
+  /* border-bottom: 1px solid var(--line); */
   margin-bottom: 18px;
 }
 
@@ -141,7 +141,9 @@ footer{
 }
 
 /* Publication cards */
-.pub-card {margin: 16px 0; }
+.pub-card {
+  background: #fafafa;   /* very light gray */
+  margin: 16px 0; }
 .pub-card h3 { margin: 0 0 0px;  font-size: 16px; }
 .pub-card p { margin: 0px 0; }
 
