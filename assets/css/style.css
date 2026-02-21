@@ -127,15 +127,19 @@ footer{
   .brand{ min-width: unset; }
   h1{ font-size: 28px; }
 
-/* Compact cards for publications/theses/news rendered from Markdown */
-.card p { margin: 6px 0; }
-.card h2 { margin: 0 0 6px; }
-.card h3 { margin: 0 0 6px; }
-.card ul { margin: 6px 0 0; }
-
-.pub-card h2 { margin: 0 0 6px; font-size: 18px; }
-.pub-card p { margin: 6px 0; }
-.pub-card ul { margin: 6px 0 0; }
-.pub-card strong { color: var(--text); }
+/* Year headers */
+#pub_list > h2 {
+  margin-top: 32px;
+  padding-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #eaeaea;
 }
+
+/* Publication cards */
+.pub-card {margin: 14px 0; }
+.pub-card h3 { margin: 0 0 6px;  font-size: 18px; }
+.pub-card p { margin: 4px 0; }
+
+
 
