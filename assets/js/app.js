@@ -1,41 +1,12 @@
-// Very small markdown-ish renderer (headings, paragraphs, lists, links).
-// Keeps things simple for GitHub Pages static hosting.
 function renderMarkdown(md) {
-  const esc = (s) => s
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // Basic link: [text](url)
-  const linkify = (s) => s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-
-  const lines = md.replace(/\r\n/g, "\n").split("\n");
-  let html = "";
-  let inList = false;
-
-  const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
-
-  for (let raw of lines) {
-    const line = raw.trimEnd();
-
-    if (!line.trim()) { closeList(); continue; }
-
-    // Headings
-    if (line.startsWith("### ")) { closeList(); html += `<h3>${linkify(esc(line.slice(4)))}</h3>`; continue; }
-    if (line.startsWith("## "))  { closeList(); html += `<h2>${linkify(esc(line.slice(3)))}</h2>`; continue; }
-    if (line.startsWith("# "))   { closeList(); html += `<h1>${linkify(esc(line.slice(2)))}</h1>`; continue; }
-
-    // List items
-    if (line.startsWith("- ") || line.startsWith("* ")) {
-      if (!inList) { html += "<ul>"; inList = true; }
-      html += `<li>${linkify(esc(line.slice(2)))}</li>`;
-      continue;
-    }
-
-    closeList();
-    html += `<p>${linkify(esc(line))}</p>`;
+  if (window.marked && typeof window.marked.parse === "function") {
+    // Basic safety: no raw HTML rendering
+    marked.setOptions({ headerIds: false, mangle: false });
+    return marked.parse(md, { sanitize: false });
   }
 
-  closeList();
-  return html;
+  // Fallback: plain text if marked didn't load
+  return `<pre>${md.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`;
 }
 
 async function loadMarkdownInto(selector, path) {
@@ -52,7 +23,6 @@ async function loadMarkdownInto(selector, path) {
   }
 }
 
-// For list pages (publications/news/theses), uses an index.json to load multiple MD files.
 async function loadIndexList(listSelector, indexJsonPath, basePath) {
   const el = document.querySelector(listSelector);
   if (!el) return;
@@ -67,7 +37,7 @@ async function loadIndexList(listSelector, indexJsonPath, basePath) {
       const r = await fetch(`${basePath}/${f}`, { cache: "no-store" });
       if (!r.ok) continue;
       const md = await r.text();
-      blocks.push(`<div class="card" style="margin:14px 0">${renderMarkdown(md)}</div>`);
+      blocks.push(`<article class="card pub-card">${renderMarkdown(md)}</article>`);
     }
 
     el.innerHTML = blocks.join("") || `<p class="muted">No entries yet.</p>`;
