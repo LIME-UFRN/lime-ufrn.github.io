@@ -126,4 +126,11 @@ footer{
   .kv{ grid-template-columns: 1fr; }
   .brand{ min-width: unset; }
   h1{ font-size: 28px; }
+
+/* Compact cards for publications/theses/news rendered from Markdown */
+.card p { margin: 6px 0; }
+.card h2 { margin: 0 0 6px; }
+.card h3 { margin: 0 0 6px; }
+.card ul { margin: 6px 0 0; }
+
 }
