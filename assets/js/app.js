@@ -238,6 +238,34 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function buildEmailPlaceholderHtml(email) {
+  const value = String(email || "").trim();
+  const at = value.lastIndexOf("@");
+  if (at <= 0 || at === value.length - 1) return "";
+
+  const user = value.slice(0, at);
+  const domain = value.slice(at + 1);
+  return `<span class="email-placeholder" data-user="${escapeHtml(user)}" data-domain="${escapeHtml(domain)}"></span>`;
+}
+
+function hydrateEmailPlaceholders(root) {
+  const scope = root || document;
+  const placeholders = scope.querySelectorAll(".email-placeholder");
+
+  placeholders.forEach((el) => {
+    const user = el.getAttribute("data-user") || "";
+    const domain = el.getAttribute("data-domain") || "";
+    if (!user || !domain) return;
+
+    const email = `${user}@${domain}`;
+    const link = document.createElement("a");
+    link.href = `mailto:${email}`;
+    link.textContent = email;
+
+    el.replaceChildren(link);
+  });
+}
+
 function parseMetadataBlock(raw) {
   const lines = raw.split(/\r?\n/);
   const metadata = {};
@@ -567,7 +595,7 @@ async function loadPeopleList(listSelector, indexJsonPath, basePath) {
             : "";
           const bodyHtml = person.body ? `<div class="person-body">${renderMarkdown(person.body)}</div>` : "";
           const email = person.email
-            ? `<p class="person-contact"><a href="mailto:${escapeHtml(person.email)}">${escapeHtml(person.email)}</a></p>`
+            ? `<p class="person-contact">${buildEmailPlaceholderHtml(person.email)}</p>`
             : "";
           const links = person.links.length
             ? `<p class="person-links">${person.links
@@ -611,6 +639,7 @@ async function loadPeopleList(listSelector, indexJsonPath, basePath) {
     }
 
     el.innerHTML = out || `<p class="muted">No people entries yet.</p>`;
+    hydrateEmailPlaceholders(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
   }
