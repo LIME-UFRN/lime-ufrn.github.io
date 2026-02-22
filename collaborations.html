@@ -19,16 +19,22 @@
         </div>
       </a>
 
-      <nav>
-        <a href="projects.html">Projects</a>
-        <a href="publications.html">Publications</a>
-        <a href="theses.html">Theses</a>
-        <a href="people.html">People</a>
-        <a href="facilities.html">Facilities</a>
-        <a href="collaborations.html" style="color:var(--text); background:#f3f4f6;">Collaborations</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="resources.html">Resources</a>
-        <a href="news.html">News</a>
+      <nav aria-label="Primary">
+        <a href="projects.html" data-nav-key="projects">Projects</a>
+        <a href="publications.html" data-nav-key="publications">Publications</a>
+        <a href="people.html" data-nav-key="people">People</a>
+        <a href="theses.html" data-nav-key="theses">Theses</a>
+        <a href="collaborations.html" data-nav-key="collaborations">Collaborations</a>
+        <div class="nav-dropdown" data-nav-dropdown="facilities">
+          <a class="nav-parent-link" href="facilities.html" data-nav-key="facilities">Facilities</a>
+          <button type="button" class="nav-dropdown-toggle" data-nav-dropdown-toggle aria-label="Toggle Facilities submenu" aria-haspopup="true" aria-expanded="false" aria-controls="facilities-submenu"><span class="caret" aria-hidden="true">▾</span></button>
+          <div id="facilities-submenu" class="nav-dropdown-menu" role="menu" data-nav-dropdown-menu>
+            <a href="equipment.html" role="menuitem" data-nav-key="equipment" data-nav-group="facilities">Equipment</a>
+            <a href="resources.html" role="menuitem" data-nav-key="resources" data-nav-group="facilities">Resources</a>
+            <a href="gallery.html" role="menuitem" data-nav-key="gallery" data-nav-group="facilities">Gallery</a>
+          </div>
+        </div>
+        <a href="news.html" data-nav-key="news">News</a>
       </nav>
     </div>
   </header>
@@ -52,6 +58,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/app.js?v=20260221-5"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>

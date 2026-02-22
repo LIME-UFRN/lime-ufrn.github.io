@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>People | LIME-UFRN</title>
-  <meta name="description" content="Faculty, students, and alumni at LIME-UFRN, a laboratory focused on instrumentation and microelectronics at UFRN." />
-  <link rel="canonical" href="https://lime-ufrn.github.io/people.html" />
+  <title>News | LIME-UFRN</title>
+  <meta name="description" content="News and updates from LIME-UFRN." />
+  <link rel="canonical" href="https://lime-ufrn.github.io/news.html" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -41,11 +41,13 @@
 
   <main>
     <section class="hero">
-      <h1>People</h1>
+      <h1>News</h1>
     </section>
 
     <section>
-      <div id="people_list"></div>
+      <div class="card">
+        <p class="muted" style="margin:0">Page under construction</p>
+      </div>
     </section>
   </main>
 
@@ -56,16 +58,9 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="assets/js/app.js?v=20260221-5"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if (typeof loadPeopleList === "function") {
-      loadPeopleList("#people_list", "content/people/_index.json", "content/people");
-    } else {
-      document.querySelector("#people_list").innerHTML =
-        '<p class="muted">Could not initialize people loader. Please hard refresh the page (Ctrl+F5).</p>';
-    }
   </script>
 </body>
 </html>

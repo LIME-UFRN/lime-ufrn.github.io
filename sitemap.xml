@@ -19,6 +19,9 @@
     <loc>https://lime-ufrn.github.io/facilities.html</loc>
   </url>
   <url>
+    <loc>https://lime-ufrn.github.io/equipment.html</loc>
+  </url>
+  <url>
     <loc>https://lime-ufrn.github.io/collaborations.html</loc>
   </url>
   <url>
@@ -26,5 +29,8 @@
   </url>
   <url>
     <loc>https://lime-ufrn.github.io/resources.html</loc>
+  </url>
+  <url>
+    <loc>https://lime-ufrn.github.io/news.html</loc>
   </url>
 </urlset>

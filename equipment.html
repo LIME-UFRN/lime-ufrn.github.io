@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>People | LIME-UFRN</title>
-  <meta name="description" content="Faculty, students, and alumni at LIME-UFRN, a laboratory focused on instrumentation and microelectronics at UFRN." />
-  <link rel="canonical" href="https://lime-ufrn.github.io/people.html" />
+  <title>Equipment | LIME-UFRN</title>
+  <meta name="description" content="Measurement and laboratory equipment available at LIME-UFRN." />
+  <link rel="canonical" href="https://lime-ufrn.github.io/equipment.html" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -41,11 +41,11 @@
 
   <main>
     <section class="hero">
-      <h1>People</h1>
+      <h1>Equipment</h1>
     </section>
 
-    <section>
-      <div id="people_list"></div>
+    <section class="card">
+      <div id="equipment_md"></div>
     </section>
   </main>
 
@@ -60,12 +60,7 @@
   <script src="assets/js/app.js?v=20260221-5"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if (typeof loadPeopleList === "function") {
-      loadPeopleList("#people_list", "content/people/_index.json", "content/people");
-    } else {
-      document.querySelector("#people_list").innerHTML =
-        '<p class="muted">Could not initialize people loader. Please hard refresh the page (Ctrl+F5).</p>';
-    }
+    loadMarkdownInto("#equipment_md", "content/facilities/equipment.md");
   </script>
 </body>
 </html>
