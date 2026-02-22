@@ -19,10 +19,10 @@ UFRN (Coordinator), UnB, Unicamp, ENSICAEN, INSA Rouen
 
 #### Members
 
-- Sebastian Yuri Cavalcanti Catunda (Coordinator)
-- Vincent Patrick Marie Bourguet (Member)
-- Carlos Eduardo Trabuco Dorea (Member)
-- José Alexandre Diniz (Member)
-- Luiz Felipe de Queiroz Silveira (Member)
-- Antonio Wallace Antunes Soares (Member)
-- William Reis Silva (Member)
+- Sebastian Yuri Cavalcanti Catunda (Coordinator, UFRN)
+- Vincent Patrick Marie Bourguet (Member, UFRN)
+- Carlos Eduardo Trabuco Dorea (Member, UFRN)
+- Luiz Felipe de Queiroz Silveira (Member, UFRN)
+- Antonio Wallace Antunes Soares (Member, UFRN)
+- José Alexandre Diniz (Member, Unicamp)
+- William Reis Silva (Member, UnB)
