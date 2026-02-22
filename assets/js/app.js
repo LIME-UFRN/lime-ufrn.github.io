@@ -9,6 +9,41 @@ function renderMarkdown(md) {
   return `<pre>${md.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`;
 }
 
+function configureExternalLinks(root) {
+  const scope = root || document;
+  const anchors = scope.querySelectorAll("a[href]");
+
+  anchors.forEach((a) => {
+    const rawHref = (a.getAttribute("href") || "").trim();
+    if (!rawHref) return;
+    if (
+      rawHref.startsWith("#") ||
+      rawHref.startsWith("mailto:") ||
+      rawHref.startsWith("tel:") ||
+      rawHref.startsWith("javascript:")
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(rawHref, window.location.href);
+    } catch {
+      return;
+    }
+
+    const isHttp = url.protocol === "http:" || url.protocol === "https:";
+    const isExternal = isHttp && url.origin !== window.location.origin;
+    if (!isExternal) return;
+
+    a.setAttribute("target", "_blank");
+    const rel = new Set((a.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+    rel.add("noopener");
+    rel.add("noreferrer");
+    a.setAttribute("rel", Array.from(rel).join(" "));
+  });
+}
+
 async function loadMarkdownInto(selector, path) {
   const el = document.querySelector(selector);
   if (!el) return;
@@ -19,6 +54,7 @@ async function loadMarkdownInto(selector, path) {
     const mdRaw = await res.text();
     const { body } = parseYamlFrontMatter(mdRaw);
     el.innerHTML = renderMarkdown(body);
+    configureExternalLinks(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load <code>${path}</code> (${err.message}).</p>`;
   }
@@ -183,6 +219,7 @@ async function loadIndexList(listSelector, indexJsonPath, basePath) {
     }
 
     el.innerHTML = out || `<p class="muted">No entries yet.</p>`;
+    configureExternalLinks(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
   }
@@ -224,6 +261,7 @@ async function loadProjectList(listSelector, indexJsonPath, basePath) {
     }
 
     el.innerHTML = out || `<p class="muted">No projects yet.</p>`;
+    configureExternalLinks(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
   }
@@ -496,6 +534,7 @@ async function loadThesesList(listSelector, indexJsonPath, basePath) {
     }
 
     el.innerHTML = out || `<p class="muted">No entries yet.</p>`;
+    configureExternalLinks(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
   }
@@ -640,14 +679,21 @@ async function loadPeopleList(listSelector, indexJsonPath, basePath) {
 
     el.innerHTML = out || `<p class="muted">No people entries yet.</p>`;
     hydrateEmailPlaceholders(el);
+    configureExternalLinks(el);
   } catch (err) {
     el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
   }
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSiteNav);
+  document.addEventListener("DOMContentLoaded", () => {
+    initSiteNav();
+    configureExternalLinks(document);
+  });
 } else {
   initSiteNav();
+  configureExternalLinks(document);
 }
+
+
 
