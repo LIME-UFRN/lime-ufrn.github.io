@@ -6,7 +6,7 @@
   <title>LIME-UFRN | Laboratory of Instrumentation and Microelectronics</title>
   <meta name="description" content="LIME-UFRN is a research lab at UFRN working on instrumentation, analog and mixed-signal circuits, sensors, and embedded systems." />
   <link rel="canonical" href="https://lime-ufrn.github.io/" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260222-1" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260222-2" />
 </head>
 <body>
   <header>
@@ -19,16 +19,18 @@
         </div>
       </a>
 
-      <nav class="main-nav" aria-label="Primary">
+            <nav class="main-nav" aria-label="Primary">
         <ul class="nav-list">
           <li><a href="projects.html" data-nav-key="projects">Projects</a></li>
           <li><a href="publications.html" data-nav-key="publications">Publications</a></li>
           <li><a href="people.html" data-nav-key="people">People</a></li>
           <li><a href="theses.html" data-nav-key="theses">Theses</a></li>
           <li><a href="collaborations.html" data-nav-key="collaborations">Collaborations</a></li>
-          <li class="dropdown" data-nav-dropdown="facilities">
-            <a href="facilities.html" class="dropdown-toggle" data-nav-key="facilities" data-nav-dropdown-toggle aria-haspopup="menu" aria-expanded="false" aria-controls="facilities-submenu">Facilities</a>
-            <ul id="facilities-submenu" class="dropdown-menu" role="menu" data-nav-dropdown-menu>
+          <li class="dropdown" id="facilities-dropdown" data-nav-dropdown="facilities">
+            <button class="dropdown-toggle" type="button" data-nav-key="facilities" data-nav-dropdown-toggle aria-haspopup="true" aria-expanded="false" aria-controls="facilities-menu">
+              Facilities <span class="nav-caret" aria-hidden="true">?</span>
+            </button>
+            <ul id="facilities-menu" class="dropdown-menu" role="menu" data-nav-dropdown-menu>
               <li><a href="equipment.html" role="menuitem" data-nav-key="equipment" data-nav-group="facilities">Equipment</a></li>
               <li><a href="resources.html" role="menuitem" data-nav-key="resources" data-nav-group="facilities">Resources</a></li>
               <li><a href="gallery.html" role="menuitem" data-nav-key="gallery" data-nav-group="facilities">Gallery</a></li>
@@ -83,10 +85,11 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="assets/js/app.js?v=20260222-1"></script>
+  <script src="assets/js/app.js?v=20260222-2"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
     loadMarkdownInto("#about_md", "content/about.md");
   </script>
 </body>
 </html>
+

@@ -31,7 +31,7 @@ function initSiteNav() {
   const dropdowns = Array.from(nav.querySelectorAll("[data-nav-dropdown]"));
   const closeAllDropdowns = () => {
     dropdowns.forEach((dd) => {
-      dd.classList.remove("is-open");
+      dd.classList.remove("open");
       const btn = dd.querySelector("[data-nav-dropdown-toggle]");
       if (btn) btn.setAttribute("aria-expanded", "false");
     });
@@ -45,7 +45,7 @@ function initSiteNav() {
     const submenuLinks = Array.from(menu.querySelectorAll("a"));
 
     const setOpen = (open) => {
-      dropdown.classList.toggle("is-open", open);
+      dropdown.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     };
 
@@ -53,7 +53,8 @@ function initSiteNav() {
     if (isButtonToggle) {
       toggle.addEventListener("click", (event) => {
         event.preventDefault();
-        const willOpen = !dropdown.classList.contains("is-open");
+        event.stopPropagation();
+        const willOpen = !dropdown.classList.contains("open");
         closeAllDropdowns();
         setOpen(willOpen);
         if (willOpen && window.matchMedia("(hover: none)").matches && submenuLinks[0]) {
@@ -82,8 +83,6 @@ function initSiteNav() {
       }
     });
 
-    dropdown.addEventListener("mouseenter", () => setOpen(true));
-    dropdown.addEventListener("mouseleave", () => setOpen(false));
     dropdown.addEventListener("focusin", () => setOpen(true));
     dropdown.addEventListener("focusout", (event) => {
       if (!dropdown.contains(event.relatedTarget)) setOpen(false);
