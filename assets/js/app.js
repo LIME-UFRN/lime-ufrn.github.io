@@ -38,8 +38,8 @@ function initSiteNav() {
   };
 
   dropdowns.forEach((dropdown) => {
-    const toggle = dropdown.querySelector("[data-nav-dropdown-toggle]");
-    const menu = dropdown.querySelector("[data-nav-dropdown-menu]");
+    const toggle = dropdown.querySelector("[data-nav-dropdown-toggle], .dropdown-toggle");
+    const menu = dropdown.querySelector("[data-nav-dropdown-menu], .dropdown-menu");
     if (!toggle || !menu) return;
 
     const submenuLinks = Array.from(menu.querySelectorAll("a"));
@@ -49,18 +49,27 @@ function initSiteNav() {
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     };
 
-    toggle.addEventListener("click", (event) => {
-      event.preventDefault();
-      const willOpen = !dropdown.classList.contains("is-open");
-      closeAllDropdowns();
-      setOpen(willOpen);
-      if (willOpen && window.matchMedia("(hover: none)").matches && submenuLinks[0]) {
-        submenuLinks[0].focus();
-      }
-    });
+    const isButtonToggle = toggle.tagName === "BUTTON";
+    if (isButtonToggle) {
+      toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        const willOpen = !dropdown.classList.contains("is-open");
+        closeAllDropdowns();
+        setOpen(willOpen);
+        if (willOpen && window.matchMedia("(hover: none)").matches && submenuLinks[0]) {
+          submenuLinks[0].focus();
+        }
+      });
+    }
 
     toggle.addEventListener("keydown", (event) => {
       if (event.key === "ArrowDown") {
+        event.preventDefault();
+        closeAllDropdowns();
+        setOpen(true);
+        if (submenuLinks[0]) submenuLinks[0].focus();
+      }
+      if ((event.key === " " || event.key === "Spacebar") && !isButtonToggle) {
         event.preventDefault();
         closeAllDropdowns();
         setOpen(true);
@@ -71,6 +80,13 @@ function initSiteNav() {
         setOpen(false);
         toggle.focus();
       }
+    });
+
+    dropdown.addEventListener("mouseenter", () => setOpen(true));
+    dropdown.addEventListener("mouseleave", () => setOpen(false));
+    dropdown.addEventListener("focusin", () => setOpen(true));
+    dropdown.addEventListener("focusout", (event) => {
+      if (!dropdown.contains(event.relatedTarget)) setOpen(false);
     });
 
     menu.addEventListener("keydown", (event) => {
