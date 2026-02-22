@@ -1,7 +1,6 @@
 position: faculty
 status: active
 name: Sebastian Yuri Cavalcanti Catunda
-since: 2011
 lead: true
 affiliation: Department of Computer Engineering and Automation, UFRN
 email: yuri.catunda@ufrn.br

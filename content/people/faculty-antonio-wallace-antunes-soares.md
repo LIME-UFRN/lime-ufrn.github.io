@@ -1,7 +1,7 @@
 position: faculty
 status: active
 name: Antonio Wallace Antunes Soares
-affiliation: Department of Electrical Engineering
+affiliation: Department of Electrical Engineering, UFRN
+email: wallace.soares@ufrn.br
 
-Faculty Member, Department of Electrical Engineering.  
-Research and teaching interests: Analog and mixed-signal integrated circuits, electronic instrumentation, embedded systems, and MCUs, DSPs, and FPGAs.
+Research interests: Analog and mixed-signal integrated circuits, electronic instrumentation, embedded systems, and MCUs, DSPs, and FPGAs.
