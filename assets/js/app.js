@@ -595,7 +595,7 @@ async function loadPeopleList(listSelector, indexJsonPath, basePath) {
             : "";
           const bodyHtml = person.body ? `<div class="person-body">${renderMarkdown(person.body)}</div>` : "";
           const email = person.email
-            ? `<p class="person-contact">${buildEmailPlaceholderHtml(person.email)}</p>`
+            ? `<div class="person-email"><span class="label">Email:</span>${buildEmailPlaceholderHtml(person.email)}</div>`
             : "";
           const links = person.links.length
             ? `<p class="person-links">${person.links

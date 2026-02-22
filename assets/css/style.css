@@ -312,6 +312,15 @@ footer{
   margin: 8px 0 0;
 }
 
+.person-email {
+  margin-top: 0.5rem;
+}
+
+.person-email .label {
+  font-weight: 500;
+  margin-right: 0.4rem;
+}
+
 .person-badge {
   display: inline-block;
   border: 1px solid var(--line);
