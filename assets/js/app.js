@@ -234,31 +234,33 @@ async function loadProjectList(listSelector, indexJsonPath, basePath) {
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const files = await res.json();
 
-    const groups = new Map([
-      ["Current projects", []],
-      ["Past projects", []]
-    ]);
+    const items = [];
 
     for (const f of files) {
       const r = await fetch(`${basePath}/${f}`, { cache: "no-store" });
       if (!r.ok) continue;
       const mdRaw = await r.text();
+      const { metadata, body } = parseMetadataBlock(mdRaw);
+      const type = (metadata.type || "").trim();
+      const period = (metadata.period || "").trim();
+      const role = (metadata.role || "").trim();
 
-      const m = mdRaw.match(/^\s*status:\s*(current|past)\s*$/mi);
-      const status = m ? m[1].toLowerCase() : "current";
-      const groupName = status === "past" ? "Past projects" : "Current projects";
+      const metaParts = [];
+      if (type) metaParts.push(`<span><span class="label">Type:</span> ${escapeHtml(type)}</span>`);
+      if (period) metaParts.push(`<span><span class="label">Period:</span> ${escapeHtml(period)}</span>`);
+      if (role) {
+        const roleText = role.charAt(0).toUpperCase() + role.slice(1);
+        metaParts.push(`<span><span class="label">Role:</span> ${escapeHtml(roleText)}</span>`);
+      }
 
-      const md = mdRaw.replace(/^\s*status:\s*(current|past)\s*$/mi, "").trim();
-      const html = `<article class="project-card">${renderMarkdown(md)}</article>`;
-      groups.get(groupName).push(html);
+      const metaHtml = metaParts.length
+        ? `<p class="project-meta muted">${metaParts.join(" | ")}</p>`
+        : "";
+      const html = `<article class="project-card">${metaHtml}${renderMarkdown(body)}</article>`;
+      items.push(html);
     }
 
-    let out = "";
-    for (const [groupName, items] of groups.entries()) {
-      if (!items.length) continue;
-      out += `<h2>${groupName}</h2>`;
-      out += items.join("");
-    }
+    const out = items.join("");
 
     el.innerHTML = out || `<p class="muted">No projects yet.</p>`;
     configureExternalLinks(el);
