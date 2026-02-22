@@ -6,6 +6,8 @@ role: coordinator
 
 Research exchange project focused on undergraduate student mobility and collaborative training among Brazilian and French institutions under the CAPES/BRAFITEC agreement. The initiative includes UFRN programs in Computer Engineering, Electrical Engineering, and Mechatronics Engineering, together with ENSICAEN and INSA Rouen.
 
+<br>
+
 Type: Research Network; Student Mobility  
 Period: 2024--present  
 Funding: CAPES - BRAFITEC (88881.917174/2023-01)  

@@ -6,7 +6,7 @@
   <title>Projects | LIME-UFRN</title>
   <meta name="description" content="Current and past projects from LIME-UFRN in instrumentation, microelectronics, sensors, and embedded systems." />
   <link rel="canonical" href="https://lime-ufrn.github.io/projects.html" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260222-2" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260222-3" />
 </head>
 <body>
   <header>
@@ -48,7 +48,11 @@
     </section>
 
     <section>
-      <div id="project_list"></div>
+      <h1 class="projects-section-title">Current projects</h1>
+      <div id="project_list_current"></div>
+
+      <h1 class="projects-section-title">Past projects</h1>
+      <div id="project_list_past"></div>
     </section>
   </main>
 
@@ -60,13 +64,19 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="assets/js/app.js?v=20260222-2"></script>
+  <script src="assets/js/app.js?v=20260222-3"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
     if (typeof loadProjectList === "function") {
-      loadProjectList("#project_list", "content/projects/_index.json", "content/projects");
+      loadProjectList(
+        { current: "#project_list_current", past: "#project_list_past" },
+        "content/projects/_index.json",
+        "content/projects"
+      );
     } else {
-      document.querySelector("#project_list").innerHTML =
+      document.querySelector("#project_list_current").innerHTML =
+        '<p class="muted">Could not initialize project loader. Please hard refresh the page (Ctrl+F5).</p>';
+      document.querySelector("#project_list_past").innerHTML =
         '<p class="muted">Could not initialize project loader. Please hard refresh the page (Ctrl+F5).</p>';
     }
   </script>

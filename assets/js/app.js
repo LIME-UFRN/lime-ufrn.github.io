@@ -225,47 +225,61 @@ async function loadIndexList(listSelector, indexJsonPath, basePath) {
   }
 }
 
-async function loadProjectList(listSelector, indexJsonPath, basePath) {
-  const el = document.querySelector(listSelector);
-  if (!el) return;
+function isCurrentProjectPeriod(period) {
+  return /present/i.test(String(period || ""));
+}
+
+function joinProjectItemsWithHr(items) {
+  return items
+    .map((item, index) => `${index > 0 ? "<hr>" : ""}${item}`)
+    .join("");
+}
+
+async function loadProjectList(targets, indexJsonPath, basePath) {
+  const currentSelector = typeof targets === "string" ? targets : targets && targets.current;
+  const pastSelector = typeof targets === "string" ? null : targets && targets.past;
+  const currentEl = currentSelector ? document.querySelector(currentSelector) : null;
+  const pastEl = pastSelector ? document.querySelector(pastSelector) : null;
+  if (!currentEl && !pastEl) return;
 
   try {
     const res = await fetch(indexJsonPath, { cache: "no-store" });
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const files = await res.json();
 
-    const items = [];
+    const currentItems = [];
+    const pastItems = [];
 
     for (const f of files) {
       const r = await fetch(`${basePath}/${f}`, { cache: "no-store" });
       if (!r.ok) continue;
       const mdRaw = await r.text();
       const { metadata, body } = parseMetadataBlock(mdRaw);
-      const type = (metadata.type || "").trim();
       const period = (metadata.period || "").trim();
-      const role = (metadata.role || "").trim();
+      const html = `<article class="project-card">${renderMarkdown(body)}</article>`;
 
-      const metaParts = [];
-      if (type) metaParts.push(`<span><span class="label">Type:</span> ${escapeHtml(type)}</span>`);
-      if (period) metaParts.push(`<span><span class="label">Period:</span> ${escapeHtml(period)}</span>`);
-      if (role) {
-        const roleText = role.charAt(0).toUpperCase() + role.slice(1);
-        metaParts.push(`<span><span class="label">Role:</span> ${escapeHtml(roleText)}</span>`);
+      if (isCurrentProjectPeriod(period)) {
+        currentItems.push(html);
+      } else {
+        pastItems.push(html);
       }
-
-      const metaHtml = metaParts.length
-        ? `<p class="project-meta muted">${metaParts.join(" | ")}</p>`
-        : "";
-      const html = `<article class="project-card">${metaHtml}${renderMarkdown(body)}</article>`;
-      items.push(html);
     }
 
-    const out = items.join("");
-
-    el.innerHTML = out || `<p class="muted">No projects yet.</p>`;
-    configureExternalLinks(el);
+    if (currentEl) {
+      currentEl.innerHTML = joinProjectItemsWithHr(currentItems) || `<p class="muted">No current projects yet.</p>`;
+      configureExternalLinks(currentEl);
+    }
+    if (pastEl) {
+      pastEl.innerHTML = joinProjectItemsWithHr(pastItems) || `<p class="muted">No past projects yet.</p>`;
+      configureExternalLinks(pastEl);
+    }
   } catch (err) {
-    el.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
+    if (currentEl) {
+      currentEl.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
+    }
+    if (pastEl) {
+      pastEl.innerHTML = `<p class="muted">Could not load list (${err.message}).</p>`;
+    }
   }
 }
 

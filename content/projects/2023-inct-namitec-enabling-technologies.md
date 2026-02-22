@@ -6,6 +6,8 @@ role: member
 
 Large collaborative research network in nano- and microelectronics aimed at research, development, innovation, human resource training, and science outreach in enabling technologies. The project addresses micro/nanofabrication, semiconductor devices, interface circuits, and IoT-oriented applications.
 
+<br>
+
 Type: Research Network  
 Period: 2023--present  
 Funding: CNPq - INCT-NAMITEC (406193/2022-3)  
