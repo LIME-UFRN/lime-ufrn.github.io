@@ -260,7 +260,7 @@ function hydrateEmailPlaceholders(root) {
     const email = `${user}@${domain}`;
     const link = document.createElement("a");
     link.href = `mailto:${email}`;
-    link.textContent = email;
+    link.textContent = `${user} [at] ${domain.replace(/\./g, " [dot] ")}`;
 
     el.replaceChildren(link);
   });
