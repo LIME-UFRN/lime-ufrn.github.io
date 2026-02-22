@@ -1,10 +1,10 @@
 position: faculty
 status: active
-name: Prof. Sebastian Y. C. Catunda
+name: Sebastian Yuri Cavalcanti Catunda
 since: 2011
 lead: true
 affiliation: Department of Computer Engineering and Automation, UFRN
-email: sebastian.catunda@ufrn.br
-links: scholar=https://example.com/scholar-catunda | lattes=https://example.com/lattes-catunda
+email: yuri.catunda@ufrn.br
+links: scholar=https://scholar.google.com.br/citations?user=LzE-zhwAAAAJ&hl=en | lattes=http://lattes.cnpq.br/0873496251879638
 
-Full Professor working on instrumentation, sensors, and mixed-signal systems for real-world monitoring applications.
+Research interests: Instrumentation and microelectronics, focusing on sensors, analog and mixed-signal circuits, embedded systems, and data acquisition systems
