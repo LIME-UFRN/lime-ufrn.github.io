@@ -18,7 +18,7 @@ https://lime-ufrn.github.io
 
 ------------------------------------------------------------------------
 
-## 📁 Repository Structure
+## 📁 Repository Structure 
 
 index.html → Landing page (About)\
 projects.html → Projects page\
